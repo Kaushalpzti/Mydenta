@@ -6,6 +6,7 @@
     <title>MyDenta Clinic | Modern Dentistry & Confident Smiles</title>
     <meta name="description" content="MyDenta Clinic offers modern, personalized dental care focused on healthy and confident smiles. Giving your smiles a makeover.">
     
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -86,10 +87,65 @@
             -webkit-text-fill-color: transparent;
             background-image: linear-gradient(90deg, #0d9488, #0f766e);
         }
+
+        /* ============================================
+   WATERMARK - Client payment ke baad hatao
+   ============================================ */
+.watermark-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;   /* clicks block nahi honge */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    user-select: none;
+}
+
+.watermark-overlay .wm-text {
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(2.5rem, 8vw, 7rem);
+    font-weight: 800;
+    color: rgba(13, 148, 136, 0.10);   /* halka teal */
+    transform: rotate(-30deg);
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+/* Chhota corner badge (optional) */
+.watermark-badge {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 10000;
+    background: rgba(15, 118, 110, 0.85);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    pointer-events: none;
+    user-select: none;
+}
     </style>
 </head>
 <body class="font-body text-slate-700 bg-white selection:bg-brand-200 selection:text-brand-900 overflow-x-hidden">
-
+<!-- ============================================
+     WATERMARK START - Client payment ke baad hatao
+     ============================================ -->
+<div class="watermark-overlay" id="watermark">
+    <div class="wm-text">MyDenta · Preview · MyDenta · Preview</div>
+</div>
+<div class="watermark-badge">🔒 Demo — KAUSHAL</div>
+<!-- ============================================
+     WATERMARK END
+     ============================================ -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -935,6 +991,17 @@
                 }
             }
         });
+        /* ============================================
+   WATERMARK TOGGLE
+   true  = watermark dikhega (client ne payment nahi ki)
+   false = watermark hat jayega (payment ho gayi)
+   ============================================ */
+const SHOW_WATERMARK = true;
+
+if (!SHOW_WATERMARK) {
+    document.getElementById('watermark')?.remove();
+    document.querySelector('.watermark-badge')?.remove();
+}
     </script>
 </body>
 </html>
