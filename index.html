@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDenta Clinic | Modern Dentistry & Confident Smiles</title>
+    <meta name="description" content="MyDenta Clinic offers modern, personalized dental care focused on healthy and confident smiles. Giving your smiles a makeover.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6', // Primary Brand (Teal)
+                            600: '#0d9488', // Hover
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        surface: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"DM Sans"', 'sans-serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 20px rgba(20, 184, 166, 0.3)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom base styles for smooth transitions and text rendering */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Subtle gradient text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, #0d9488, #0f766e);
+        }
+    </style>
+</head>
+<body class="font-body text-slate-700 bg-white selection:bg-brand-200 selection:text-brand-900 overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="flex items-center gap-2">
+                        <!-- Abstract Teal Tooth shape representing the logo line art -->
+                        <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center border border-brand-100 text-brand-600">
+                            <i data-lucide="smile" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex flex-col leading-none">
+                            <span class="font-heading font-bold text-xl tracking-tight text-slate-900">MyDenta</span>
+                            <span class="font-heading font-normal text-[11px] tracking-widest text-brand-600 uppercase">Clinic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">About</a>
+                    <a href="#services" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Services</a>
+                    <a href="#technology" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Technology</a>
+                    <a href="#why-us" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Why MyDenta</a>
+                    <a href="#contact" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Contact</a>
+                    
+                    <a href="#book" class="group flex items-center gap-2 px-5 py-2.5 bg-brand-600 text-white rounded-full font-medium text-sm hover:bg-brand-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i data-lucide="calendar" class="w-4 h-4 group-hover:animate-bounce"></i>
+                        <span>Book Appointment</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-600 focus:outline-none p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#about" class="block px-3 py-4 text-base font-medium text-slate-800 hover:bg-brand-50 hover:text-brand-600 rounded-lg">About</a>
+                <a href="#services" class="block px-3 py-4 text-base font-medium text-slate-800 hover:bg-brand-50 hover:text-brand-600 rounded-lg">Services</a>
+                <a href="#technology" class="block px-3 py-4 text-base font-medium text-slate-800 hover:bg-brand-50 hover:text-brand-600 rounded-lg">Technology</a>
+                <a href="#why-us" class="block px-3 py-4 text-base font-medium text-slate-800 hover:bg-brand-50 hover:text-brand-600 rounded-lg">Why MyDenta</a>
+                <a href="#contact" class="block px-3 py-4 text-base font-medium text-slate-800 hover:bg-brand-50 hover:text-brand-600 rounded-lg">Contact</a>
+                <div class="pt-4 pb-2 px-3">
+                    <a href="#book" class="flex w-full justify-center items-center gap-2 px-5 py-3.5 bg-brand-600 text-white rounded-xl font-medium text-base hover:bg-brand-700 shadow-md">
+                        <i data-lucide="calendar" class="w-5 h-5"></i>
+                        <span>Book Appointment</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-surface-50">
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] rounded-full bg-brand-50 blur-3xl opacity-60 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[400px] h-[400px] rounded-full bg-blue-50 blur-3xl opacity-60 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Content -->
+                <div class="max-w-2xl animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100/50 text-brand-700 text-sm font-medium mb-6 border border-brand-200/50">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                        Welcoming New Patients
+                    </div>
+                    <h1 class="font-heading text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6">
+                        Modern Dentistry. <br>
+                        <span class="text-gradient">Confident Smiles.</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
+                        Experience personalized dental care focused on your health and comfort. At MyDenta Clinic, we blend modern technology with a warm, human approach to give your smile a makeover.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#book" class="inline-flex justify-center items-center gap-2 px-8 py-4 bg-brand-600 text-white rounded-full font-medium text-lg hover:bg-brand-700 transition-all shadow-soft hover:shadow-lg transform hover:-translate-y-0.5">
+                            Book an Appointment
+                        </a>
+                        <a href="#services" class="inline-flex justify-center items-center gap-2 px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-full font-medium text-lg hover:bg-slate-50 hover:border-slate-300 transition-all">
+                            Explore Services
+                        </a>
+                    </div>
+                    
+                    <!-- Trust Indicators -->
+                    <div class="mt-10 flex items-center gap-6 text-sm font-medium text-slate-500">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500"></i>
+                            <span>Modern Care</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500"></i>
+                            <span>Personalized Treatment</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500"></i>
+                            <span>Family-Friendly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image Composition -->
+                <div class="relative lg:ml-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <!-- Main Image -->
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto">
+                        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Patient smiling confidently in a modern dental clinic" class="object-cover w-full h-full">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+                    </div>
+                    
+                    <!-- Floating Element -->
+                    <div class="absolute -bottom-6 -left-6 md:-left-12 bg-white p-5 rounded-2xl shadow-soft flex items-center gap-4 animate-bounce" style="animation-duration: 3s;">
+                        <div class="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center text-brand-600">
+                            <i data-lucide="sparkles" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Tagline</p>
+                            <p class="font-heading font-semibold text-slate-900 text-sm">Giving your smiles a makeover :)</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-brand-600 py-12 relative overflow-hidden">
+        <!-- Subtle pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="font-heading text-2xl md:text-3xl font-medium text-white tracking-wide">
+                "Giving your smiles a makeover :)"
+            </h2>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Imagery -->
+                <div class="relative reveal-on-scroll">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1598256989800-efa5f2b0b93c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modern dental equipment" class="rounded-2xl object-cover h-64 w-full shadow-md mt-8">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Friendly dentist consulting patient" class="rounded-2xl object-cover h-80 w-full shadow-lg">
+                    </div>
+                    <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-surface-50 rounded-full blur-3xl opacity-50"></div>
+                </div>
+
+                <!-- Text -->
+                <div class="reveal-on-scroll">
+                    <span class="text-brand-600 font-semibold tracking-wider uppercase text-sm mb-3 block">About MyDenta</span>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                        Patient-first dentistry in a comfortable environment.
+                    </h2>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                        At MyDenta Clinic, we believe that a visit to the dentist should be a positive, comfortable experience. We combine modern treatment approaches with personalized patient care to ensure you achieve and maintain optimal oral health.
+                    </p>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        Whether you need a routine check-up, preventive care, or a complete smile makeover, our focus is always on your well-being. We create a welcoming, family-friendly environment where every patient feels heard, respected, and cared for.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-brand-500 flex-shrink-0 mt-0.5"></i>
+                            <span class="text-slate-700 font-medium">Preventive & comprehensive oral care</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-brand-500 flex-shrink-0 mt-0.5"></i>
+                            <span class="text-slate-700 font-medium">Smile-focused aesthetic treatments</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-brand-500 flex-shrink-0 mt-0.5"></i>
+                            <span class="text-slate-700 font-medium">Welcoming environment for all ages</span>
+                        </li>
+                    </ul>
+
+                    <a href="#services" class="inline-flex items-center gap-2 font-medium text-brand-600 hover:text-brand-700 transition-colors group">
+                        Learn more about our approach
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-surface-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                <span class="text-brand-600 font-semibold tracking-wider uppercase text-sm mb-3 block">Our Services</span>
+                <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">Comprehensive Dental Care</h2>
+                <p class="text-slate-600 text-lg">From routine hygiene to advanced restorations, we offer a full spectrum of treatments tailored to your unique smile.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-xl transition-all duration-300 group reveal-on-scroll border border-slate-100">
+                    <div class="w-14 h-14 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="activity" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">General Dentistry</h3>
+                    <p class="text-slate-600 mb-6 line-clamp-3">Comprehensive check-ups, digital diagnostics, and fundamental treatments to maintain your overall oral health.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-xl transition-all duration-300 group reveal-on-scroll border border-slate-100" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="sparkles" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Cosmetic Dentistry</h3>
+                    <p class="text-slate-600 mb-6 line-clamp-3">Enhance the aesthetics of your smile with professional treatments designed to boost your confidence.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-xl transition-all duration-300 group reveal-on-scroll border border-slate-100" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="shield-check" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Restorative Care</h3>
+                    <p class="text-slate-600 mb-6 line-clamp-3">Repair and restore damaged or missing teeth to regain full function and a natural appearance.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center reveal-on-scroll">
+                <p class="text-slate-500 text-sm italic">Treatment availability is determined after a professional consultation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="technology" class="py-24 bg-slate-900 relative overflow-hidden">
+        <!-- Tech-like abstract background -->
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+            <svg viewBox="0 0 100 100" class="w-full h-full fill-current text-brand-500" preserveAspectRatio="none">
+                <path d="M0,0 L100,0 L100,100 L0,100 Z M50,20 L80,50 L50,80 L20,50 Z" opacity="0.3"></path>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="0.5"></circle>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-on-scroll order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/50 text-brand-300 border border-brand-800 text-sm font-medium mb-6">
+                        <i data-lucide="cpu" class="w-4 h-4"></i>
+                        Instagram Highlight
+                    </div>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                        Digital Dentistry.<br>
+                        <span class="text-brand-400">Better experiences.</span>
+                    </h2>
+                    <p class="text-slate-300 mb-8 text-lg leading-relaxed">
+                        We embrace modern dental technology to provide a superior patient experience. Digital workflows allow for more precise diagnostics, efficient treatment planning, and ultimately, a more comfortable visit for you.
+                    </p>
+                    <ul class="space-y-5">
+                        <li class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-brand-800/50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="scan-line" class="w-4 h-4 text-brand-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-1">Precise Diagnostics</h4>
+                                <p class="text-slate-400 text-sm">Clearer insights for accurate treatment planning.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-brand-800/50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="clock" class="w-4 h-4 text-brand-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-1">Efficient Workflows</h4>
+                                <p class="text-slate-400 text-sm">Streamlined processes to save your valuable time.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="relative reveal-on-scroll order-1 lg:order-2">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dentist using modern digital technology" class="rounded-2xl shadow-2xl relative z-10 border border-slate-700">
+                    <!-- Glowing accent behind image -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-brand-500 rounded-full blur-[100px] opacity-20 -z-0"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-surface-50 rounded-3xl overflow-hidden shadow-soft flex flex-col md:flex-row reveal-on-scroll border border-slate-100">
+                <div class="md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                        Giving your smiles a makeover.
+                    </h2>
+                    <p class="text-slate-600 mb-8 text-lg">
+                        Your smile is your signature. We offer customized aesthetic solutions designed to enhance your natural teeth, harmonize with your facial features, and boost your everyday confidence.
+                    </p>
+                    <div>
+                        <a href="tel:7204735599" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800 transition-colors">
+                            <i data-lucide="message-square" class="w-4 h-4"></i>
+                            Book a Smile Consultation
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 h-64 md:h-auto">
+                    <img src="https://images.unsplash.com/photo-1590650046871-92c887180603?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Beautiful confident smile" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 relative reveal-on-scroll">
+                    <div class="aspect-square max-w-md mx-auto rounded-full overflow-hidden border-8 border-brand-50 shadow-xl relative z-10">
+                         <img src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dental cleaning tools" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Decorative circle -->
+                    <div class="absolute top-10 -right-4 w-24 h-24 rounded-full bg-brand-100 -z-0"></div>
+                </div>
+                
+                <div class="order-1 lg:order-2 reveal-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-medium mb-6">
+                        <i data-lucide="droplet" class="w-4 h-4"></i>
+                        Instagram Highlight
+                    </div>
+                    <h2 class="font-heading text-4xl font-bold text-slate-900 mb-6">
+                        The foundation of a healthy mouth: <span class="text-brand-600">Tooth Hygiene</span>
+                    </h2>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                        Beautiful smiles start with healthy gums and clean teeth. Regular professional cleanings and diligent home care are essential for preventing decay, gum disease, and maintaining long-term oral health.
+                    </p>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        Our hygiene team is dedicated to educating patients and providing gentle, thorough preventive care to keep your smile bright and healthy for years to come.
+                    </p>
+                    <a href="tel:7204735599" class="inline-flex items-center gap-2 font-medium text-brand-600 hover:text-brand-700 transition-colors group">
+                        Schedule a Dental Check-up
+                        <i data-lucide="calendar-plus" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-amber-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-[2.5rem] shadow-lg p-8 md:p-16 relative overflow-hidden reveal-on-scroll">
+                <!-- Background decor -->
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-amber-100 rounded-full mix-blend-multiply opacity-70"></div>
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-100 rounded-full mix-blend-multiply opacity-70"></div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-sm font-medium mb-6">
+                            <i data-lucide="baby" class="w-4 h-4"></i>
+                            Instagram Highlight
+                        </div>
+                        <h2 class="font-heading text-4xl font-bold text-slate-900 mb-6">
+                            Gentle care for your <span class="text-amber-500">Kid's Smile</span>
+                        </h2>
+                        <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                            We know that early dental experiences shape a child's lifelong attitude toward oral health. Our clinic is designed to feel safe, friendly, and cheerful for our youngest patients.
+                        </p>
+                        <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                            Our team takes the time to explain procedures in a kid-friendly way, focusing on preventive care and building positive habits from an early age.
+                        </p>
+                        <a href="#book" class="inline-flex justify-center items-center gap-2 px-6 py-3 bg-amber-500 text-white rounded-full font-medium hover:bg-amber-600 transition-colors shadow-soft">
+                            Book a Family Visit
+                        </a>
+                    </div>
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dentist examining a child's teeth" class="rounded-[2rem] shadow-lg object-cover h-[400px] w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                <span class="text-brand-600 font-semibold tracking-wider uppercase text-sm mb-3 block">Patient Experience</span>
+                <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">What to expect at MyDenta</h2>
+                <p class="text-slate-600 text-lg">A structured, transparent approach to your dental health journey.</p>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto reveal-on-scroll">
+                <!-- Vertical Line -->
+                <div class="absolute left-[27px] md:left-1/2 md:-ml-[1px] top-0 bottom-0 w-[2px] bg-slate-100"></div>
+
+                <div class="space-y-12">
+                    <!-- Step 1 -->
+                    <div class="relative flex items-start md:justify-between group">
+                        <div class="hidden md:block w-[45%] text-right pr-12">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Consultation</h3>
+                            <p class="text-slate-600">We discuss your concerns, medical history, and smile goals in a relaxed setting.</p>
+                        </div>
+                        <div class="absolute left-0 md:left-1/2 -ml-[28px] mt-1 w-14 h-14 rounded-full bg-white border-4 border-brand-100 flex items-center justify-center shadow-sm z-10 group-hover:border-brand-500 transition-colors duration-300">
+                            <span class="font-heading font-bold text-brand-600 text-lg">01</span>
+                        </div>
+                        <div class="pl-20 md:hidden w-full">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Consultation</h3>
+                            <p class="text-slate-600">We discuss your concerns, medical history, and smile goals in a relaxed setting.</p>
+                        </div>
+                        <div class="hidden md:block w-[45%] pl-12"></div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative flex items-start md:justify-between group">
+                        <div class="hidden md:block w-[45%] pr-12"></div>
+                        <div class="absolute left-0 md:left-1/2 -ml-[28px] mt-1 w-14 h-14 rounded-full bg-white border-4 border-brand-100 flex items-center justify-center shadow-sm z-10 group-hover:border-brand-500 transition-colors duration-300">
+                            <span class="font-heading font-bold text-brand-600 text-lg">02</span>
+                        </div>
+                        <div class="pl-20 md:w-[45%] md:pl-12 w-full text-left">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Diagnosis</h3>
+                            <p class="text-slate-600">Thorough examination using modern diagnostic tools to assess your oral health.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative flex items-start md:justify-between group">
+                        <div class="hidden md:block w-[45%] text-right pr-12">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Personalized Plan</h3>
+                            <p class="text-slate-600">We present clear treatment options tailored to your specific needs and preferences.</p>
+                        </div>
+                        <div class="absolute left-0 md:left-1/2 -ml-[28px] mt-1 w-14 h-14 rounded-full bg-white border-4 border-brand-100 flex items-center justify-center shadow-sm z-10 group-hover:border-brand-500 transition-colors duration-300">
+                            <span class="font-heading font-bold text-brand-600 text-lg">03</span>
+                        </div>
+                        <div class="pl-20 md:hidden w-full">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Personalized Plan</h3>
+                            <p class="text-slate-600">We present clear treatment options tailored to your specific needs and preferences.</p>
+                        </div>
+                        <div class="hidden md:block w-[45%] pl-12"></div>
+                    </div>
+
+                     <!-- Step 4 -->
+                     <div class="relative flex items-start md:justify-between group">
+                        <div class="hidden md:block w-[45%] pr-12"></div>
+                        <div class="absolute left-0 md:left-1/2 -ml-[28px] mt-1 w-14 h-14 rounded-full bg-white border-4 border-brand-100 flex items-center justify-center shadow-sm z-10 group-hover:border-brand-500 transition-colors duration-300">
+                            <span class="font-heading font-bold text-brand-600 text-lg">04</span>
+                        </div>
+                        <div class="pl-20 md:w-[45%] md:pl-12 w-full text-left">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Treatment</h3>
+                            <p class="text-slate-600">Comfortable, professional care executed by our dedicated clinical team.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-surface-50 border-t border-slate-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal-on-scroll">
+                <div class="max-w-2xl">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="instagram" class="w-6 h-6 text-pink-600"></i>
+                        <span class="font-semibold text-slate-900 text-lg">@_mydenta_clinic_</span>
+                    </div>
+                    <h2 class="font-heading text-3xl font-bold text-slate-900">Follow our clinic life</h2>
+                    <p class="text-slate-600 mt-2">See real moments, smile transformations, and behind-the-scenes at MyDenta.</p>
+                </div>
+                <a href="https://instagram.com/_mydenta_clinic_" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-full font-medium hover:bg-slate-50 transition-colors mt-4 md:mt-0">
+                    Follow on Instagram
+                </a>
+            </div>
+
+            <!-- Curated Social Grid simulating their actual posts (using placeholders styled to look real) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal-on-scroll">
+                <!-- Post 1 (Clinic setup) -->
+                <a href="https://instagram.com/_mydenta_clinic_" target="_blank" class="block group relative aspect-square overflow-hidden rounded-xl bg-slate-200">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Clinic interior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i data-lucide="heart" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+                <!-- Post 2 (Dentist working) -->
+                <a href="https://instagram.com/_mydenta_clinic_" target="_blank" class="block group relative aspect-square overflow-hidden rounded-xl bg-slate-200">
+                    <img src="https://images.unsplash.com/photo-1598256989800-efa5f2b0b93c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dentist at work" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-2 right-2"><i data-lucide="video" class="text-white w-5 h-5 drop-shadow-md"></i></div>
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i data-lucide="play" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+                <!-- Post 3 (Dental tools closeup) -->
+                <a href="https://instagram.com/_mydenta_clinic_" target="_blank" class="block group relative aspect-square overflow-hidden rounded-xl bg-slate-200">
+                    <img src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dental tools" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i data-lucide="heart" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+                 <!-- Post 4 (Patient treatment) -->
+                 <a href="https://instagram.com/_mydenta_clinic_" target="_blank" class="block group relative aspect-square overflow-hidden rounded-xl bg-slate-200">
+                    <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Patient treatment" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i data-lucide="heart" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="https://instagram.com/_mydenta_clinic_" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-full font-medium hover:bg-slate-50 transition-colors">
+                    Follow on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="book" class="py-24 bg-surface-50 relative overflow-hidden">
+        <!-- Abstract decor -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-100 rounded-full blur-[100px] opacity-60 -mr-40 -mt-40 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-50 rounded-full blur-[80px] opacity-60 -ml-20 -mb-20 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row border border-slate-100 reveal-on-scroll">
+                
+                <!-- Info Column -->
+                <div class="lg:w-5/12 bg-slate-900 text-white p-10 md:p-14 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-600 rounded-full blur-3xl opacity-20 -mr-10 -mt-10"></div>
+                    
+                    <div class="relative z-10">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-brand-400 text-sm font-medium mb-6 border border-slate-700">
+                            <i data-lucide="calendar-check" class="w-4 h-4"></i>
+                            Accepting New Patients
+                        </span>
+                        <h2 class="font-heading text-4xl font-bold mb-4">Book your visit</h2>
+                        <p class="text-slate-400 mb-10 text-lg">
+                            Take the first step toward a healthier, more confident smile. Fill out the form, and our team will contact you to confirm your appointment.
+                        </p>
+                        
+                        <div class="space-y-8">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 border border-slate-700">
+                                    <i data-lucide="phone" class="w-5 h-5 text-brand-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400 font-medium mb-1">Call Us Directly</p>
+                                    <a href="tel:7204735599" class="text-xl font-heading font-semibold text-white hover:text-brand-400 transition-colors">7204735599</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 border border-slate-700">
+                                    <i data-lucide="message-circle" class="w-5 h-5 text-brand-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400 font-medium mb-1">Chat with us</p>
+                                    <a href="https://wa.me/917204735599" target="_blank" class="text-lg font-medium text-white hover:text-brand-400 transition-colors">Message on WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="lg:w-7/12 p-10 md:p-14 bg-white relative">
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Full Name -->
+                            <div class="space-y-2">
+                                <label for="name" class="block text-sm font-medium text-slate-700">Full Name *</label>
+                                <input type="text" id="name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors outline-none" placeholder="John Doe">
+                            </div>
+                            
+                            <!-- Phone -->
+                            <div class="space-y-2">
+                                <label for="phone" class="block text-sm font-medium text-slate-700">Phone Number *</label>
+                                <input type="tel" id="phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors outline-none" placeholder="7204735599">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Email -->
+                            <div class="space-y-2">
+                                <label for="email" class="block text-sm font-medium text-slate-700">Email Address (Optional)</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors outline-none" placeholder="john@example.com">
+                            </div>
+
+                            <!-- Service -->
+                            <div class="space-y-2">
+                                <label for="service" class="block text-sm font-medium text-slate-700">Service of Interest</label>
+                                <select id="service" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors outline-none appearance-none cursor-pointer">
+                                    <option value="" disabled selected>Select a service...</option>
+                                    <option value="General Consultation">General Consultation</option>
+                                    <option value="Smile Makeover">Smile Makeover / Cosmetic</option>
+                                    <option value="Tooth Hygiene">Tooth Hygiene / Cleaning</option>
+                                    <option value="Kids Dentistry">Kids Dentistry</option>
+                                    <option value="Other">Other Concern</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="space-y-2">
+                            <label for="message" class="block text-sm font-medium text-slate-700">How can we help? (Optional)</label>
+                            <textarea id="message" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors outline-none resize-none" placeholder="Briefly describe your concern or preferred appointment time..."></textarea>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="w-full flex justify-center items-center gap-2 px-8 py-4 bg-brand-600 text-white rounded-xl font-medium text-lg hover:bg-brand-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            Request Appointment
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                        
+                        <p class="text-xs text-center text-slate-500 mt-4">
+                            By submitting this form, you agree to be contacted by MyDenta Clinic regarding your appointment.
+                        </p>
+                    </form>
+
+                    <!-- Success State (Hidden by default) -->
+                    <div id="booking-success" class="hidden h-full flex-col items-center justify-center text-center space-y-4 py-12 animate-fade-in-up">
+                        <div class="w-20 h-20 bg-brand-50 rounded-full flex items-center justify-center mb-2">
+                            <i data-lucide="check-circle-2" class="w-10 h-10 text-brand-500"></i>
+                        </div>
+                        <h3 class="font-heading text-3xl font-bold text-slate-900">Request Sent!</h3>
+                        <p class="text-slate-600 text-lg max-w-md">
+                            Thank you for choosing MyDenta Clinic. Our team will review your request and call you shortly to confirm your appointment time.
+                        </p>
+                        <button id="book-another" class="mt-6 text-brand-600 font-medium hover:text-brand-700 underline underline-offset-4">
+                            Book another appointment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                <span class="text-brand-600 font-semibold tracking-wider uppercase text-sm mb-3 block">Get In Touch</span>
+                <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">Visit MyDenta Clinic</h2>
+                <p class="text-slate-600 text-lg">We are ready to welcome you. Reach out to us for appointments or any dental inquiries.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Info -->
+                <div class="space-y-8 reveal-on-scroll">
+                    <div class="flex items-start gap-5 p-6 rounded-2xl bg-surface-50 border border-slate-100 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="phone-call" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">Call Us</h4>
+                            <p class="text-slate-600 mb-2">Speak directly with our front desk to schedule your visit.</p>
+                            <a href="tel:7204735599" class="text-xl font-semibold text-brand-600 hover:text-brand-700 transition-colors">7204735599</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-5 p-6 rounded-2xl bg-surface-50 border border-slate-100 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">Location</h4>
+                            <p class="text-slate-600 mb-2">Premium dental care in your neighborhood.</p>
+                            <p class="text-sm text-slate-500 italic">Exact location details provided upon appointment confirmation.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-5 p-6 rounded-2xl bg-surface-50 border border-slate-100 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="share-2" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">Follow Us</h4>
+                            <p class="text-slate-600 mb-3">Stay updated with our latest smile transformations.</p>
+                            <div class="flex gap-4">
+                                <a href="https://instagram.com/_mydenta_clinic_" target="_blank" class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-700 hover:bg-brand-600 hover:text-white transition-all transform hover:-translate-y-1"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                                <a href="https://m.facebook.com/OralHealthAwarenessforall/" target="_blank" class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-700 hover:bg-brand-600 hover:text-white transition-all transform hover:-translate-y-1"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Map Placeholder -->
+                <div class="relative h-[500px] rounded-3xl overflow-hidden shadow-lg reveal-on-scroll border border-slate-100 bg-slate-100 flex items-center justify-center group">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Map Location Placeholder" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700 mix-blend-multiply">
+                    <div class="absolute inset-0 bg-brand-900/10 group-hover:bg-transparent transition-colors duration-700"></div>
+                    <div class="relative z-10 flex flex-col items-center p-8 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl text-center max-w-sm m-4 transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <div class="w-16 h-16 rounded-full bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center mb-4 shadow-inner">
+                            <i data-lucide="map-pin" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-slate-900 mb-2">MyDenta Clinic</h3>
+                        <p class="text-slate-600 mb-6 font-medium">Your destination for a confident, healthy smile.</p>
+                        <a href="#book" class="px-8 py-3 bg-brand-600 text-white rounded-full font-medium hover:bg-brand-700 transition-colors w-full shadow-md hover:shadow-lg">Book to Visit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 text-brand-400">
+                            <i data-lucide="smile" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex flex-col leading-none">
+                            <span class="font-heading font-bold text-xl tracking-tight text-white">MyDenta</span>
+                            <span class="font-heading font-normal text-[11px] tracking-widest text-brand-400 uppercase">Clinic</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-6">
+                        Giving your smiles a makeover :)<br>
+                        Modern, personalized dental care.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <a href="https://instagram.com/_mydenta_clinic_" class="text-slate-400 hover:text-white transition-colors" aria-label="Instagram">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://m.facebook.com/OralHealthAwarenessforall/" class="text-slate-400 hover:text-white transition-colors" aria-label="Facebook">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Clinic</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-slate-400 hover:text-brand-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="#services" class="text-slate-400 hover:text-brand-400 text-sm transition-colors">Our Services</a></li>
+                        <li><a href="#technology" class="text-slate-400 hover:text-brand-400 text-sm transition-colors">Technology</a></li>
+                        <li><a href="#why-us" class="text-slate-400 hover:text-brand-400 text-sm transition-colors">Patient Experience</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact placeholder (Address hidden as requested, keeping structure ready) -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="phone" class="w-4 h-4 text-brand-400 mt-0.5"></i>
+                            <a href="tel:7204735599" class="text-slate-400 hover:text-white text-sm transition-colors">7204735599</a>
+                        </li>
+                        <!-- Placeholder for physical location if added later -->
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-slate-600 mt-0.5"></i>
+                            <span class="text-slate-600 text-sm italic">Location details available upon booking or via contact.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA Column -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Visit Us</h4>
+                    <p class="text-slate-400 text-sm mb-4">Book your appointment today and take the first step towards a healthier smile.</p>
+                    <a href="#book" class="inline-flex items-center justify-center w-full px-4 py-2 bg-brand-600 text-white rounded-lg font-medium text-sm hover:bg-brand-500 transition-colors">
+                        Book Appointment
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-slate-500 text-sm">
+                    &copy; <span id="year"></span> MyDenta Clinic. All rights reserved.
+                </p>
+                <div class="flex items-center gap-4 text-sm text-slate-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Sticky Navbar effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-sm');
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+            }
+        });
+
+        // Scroll Reveal Animation setup using Intersection Observer
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Trigger when 15% of element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            revealElements.forEach(el => observer.observe(el));
+            
+            const bookingForm = document.getElementById('booking-form');
+            const bookingSuccess = document.getElementById('booking-success');
+            const bookAnotherBtn = document.getElementById('book-another');
+
+            if (bookingForm && bookingSuccess) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Simulating API call/submission
+                    bookingForm.style.display = 'none';
+                    bookingSuccess.classList.remove('hidden');
+                    bookingSuccess.classList.add('flex');
+                });
+
+                if(bookAnotherBtn) {
+                    bookAnotherBtn.addEventListener('click', function() {
+                        bookingForm.reset();
+                        bookingSuccess.classList.add('hidden');
+                        bookingSuccess.classList.remove('flex');
+                        bookingForm.style.display = 'block';
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
